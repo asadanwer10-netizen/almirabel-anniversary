@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Almirabel 💖</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #ff4d6d;
+            --bg-color: #0b0c10;
+        }
+        
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-color);
+            overflow: hidden;
+            font-family: 'Montserrat', sans-serif;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Starry Background */
+        #stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.2; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* Main Content Container */
+        .container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Typewriter text */
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(255, 77, 109, 0.5);
+            opacity: 0;
+            animation: fadeInText 2s forwards 0.5s;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-bottom: 50px;
+            opacity: 0;
+            animation: fadeInText 2s forwards 2s;
+        }
+
+        @keyframes fadeInText {
+            to { opacity: 1; }
+        }
+
+        /* Beating Heart */
+        .heart-wrapper {
+            cursor: pointer;
+            position: relative;
+            width: 100px;
+            height: 100px;
+            animation: pulse 1.5s infinite;
+            transition: transform 0.3s;
+        }
+        
+        .heart-wrapper:hover {
+            transform: scale(1.1);
+        }
+
+        .heart {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 52px;
+            height: 80px;
+            border-radius: 50px 50px 0 0;
+            background: var(--primary-color);
+            box-shadow: 0 0 40px var(--primary-color);
+        }
+
+        .heart::before {
+            left: 50px;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+
+        .heart::after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+            100% { transform: scale(1); }
+        }
+
+        .hint {
+            margin-top: 40px;
+            font-size: 0.9rem;
+            opacity: 0;
+            animation: fadeInText 2s forwards 3s;
+            color: #888;
+        }
+
+        /* Floating Mini Hearts */
+        .mini-heart {
+            position: absolute;
+            bottom: -50px;
+            color: var(--primary-color);
+            font-size: 24px;
+            animation: floatUp 3s ease-in forwards;
+            z-index: 5;
+            pointer-events: none;
+            text-shadow: 0 0 10px var(--primary-color);
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(1) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100vh) scale(1.5) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="stars"></div>
+
+    <div class="container">
+        <h1>Happy 6 Months, Almirabel</h1>
+        <div class="subtitle">Half a year of magic. Here is to many more.</div>
+        
+        <div class="heart-wrapper" onclick="spawnHearts()">
+            <div class="heart"></div>
+        </div>
+
+        <div class="hint">Tap the heart 💖</div>
+    </div>
+
+    <script>
+        // Generate Starry Sky
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
+
+            for (let i = 0; i < 150; i++) {
+                let star = document.createElement('div');
+                star.className = 'star';
+                
+                // Randomize star properties
+                let size = Math.random() * 3 + 1;
+                let x = Math.random() * windowWidth;
+                let y = Math.random() * windowHeight;
+                let duration = Math.random() * 2 + 1;
+                let delay = Math.random() * 2;
+
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.left = x + 'px';
+                star.style.top = y + 'px';
+                star.style.animationDuration = duration + 's';
+                star.style.animationDelay = delay + 's';
+
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Spawn Floating Hearts on Click
+        function spawnHearts() {
+            const container = document.body;
+            
+            for(let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.innerHTML = '❤';
+                    heart.className = 'mini-heart';
+                    
+                    // Randomize starting position around the center
+                    const startX = (window.innerWidth / 2) + (Math.random() * 200 - 100);
+                    heart.style.left = startX + 'px';
+                    
+                    // Randomize animation duration slightly
+                    heart.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    
+                    container.appendChild(heart);
+                    
+                    // Clean up DOM after animation
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 4000);
+                }, i * 100); // Stagger the spawn times
+            }
+        }
+
+        // Initialize stars on load
+        window.onload = createStars;
+        
+        // Re-calculate stars if window is resized
+        window.onresize = () => {
+            document.getElementById('stars').innerHTML = '';
+            createStars();
+        }
+    </script>
+</body>
+</html>
