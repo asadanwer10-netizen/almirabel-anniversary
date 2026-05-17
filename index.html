@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For Almirabel</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-color: #050505;
@@ -36,7 +36,7 @@
             transition: transform 0.3s ease, opacity 0.5s ease;
             animation: float 3s ease-in-out infinite;
             z-index: 10;
-            margin: 30px 0;
+            margin: 25px 0;
             -webkit-tap-highlight-color: transparent;
         }
 
@@ -50,22 +50,24 @@
 
         /* The Story Text */
         #message {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 300;
-            max-width: 80%;
-            min-height: 80px;
+            max-width: 85%;
+            min-height: 100px;
             opacity: 1;
             transition: opacity 0.5s ease;
             z-index: 10;
-            line-height: 1.4;
+            line-height: 1.6;
+            padding: 0 15px;
         }
 
         #sub-message {
             font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.5);
-            margin-top: 20px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 15px;
             z-index: 10;
             animation: pulseText 2s infinite;
+            letter-spacing: 1px;
         }
 
         /* Step-specific backgrounds */
@@ -84,7 +86,7 @@
 
         @keyframes pulseText {
             0%, 100% { opacity: 0.3; }
-            50% { opacity: 0.8; }
+            50% { opacity: 0.9; }
         }
 
         @keyframes beat {
@@ -98,14 +100,29 @@
             animation: beat 1.2s infinite !important;
         }
 
+        /* Final Screen Special Styling */
         .final-title {
             font-family: 'Dancing Script', cursive;
-            font-size: 4rem;
+            font-size: 3.8rem;
             margin: 0;
             background: -webkit-linear-gradient(#ff758c, #ff7eb3);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-shadow: 2px 2px 10px rgba(255,117,140,0.3);
+            line-height: 1.2;
+        }
+
+        .date-badge {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            display: inline-block;
+            margin: 15px 0;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
         /* Confetti/Particle System */
@@ -134,43 +151,43 @@
         const message = document.getElementById('message');
         const subMessage = document.getElementById('sub-message');
 
-        // The story progression
+        // The story progression with updated, deeper notes
         const steps = [
             {
                 emoji: "✨",
-                text: "Hey Almirabel...",
+                text: "Hey Almirabel... On November 18, 2025, everything changed.",
                 sub: "Tap the spark"
             },
             {
                 emoji: "🌱",
-                text: "It started with a tiny spark 6 months ago...",
+                text: "That was the day our story began. Over the last six months, you have become my absolute favorite part of every single day.",
                 sub: "Tap again"
             },
             {
                 emoji: "🦋",
-                text: "Which quickly grew into something beautiful.",
+                text: "From our longest conversations to the quietest moments, every memory we've made is a beautiful treasure I hold close.",
                 sub: "Keep tapping"
             },
             {
                 emoji: "🧪",
-                text: "The chemistry between us was undeniable...",
+                text: "You brought a completely new kind of magic into my world. With every laugh and every smile, you completely stole my heart.",
                 sub: "Almost there"
             },
             {
                 emoji: "💓",
-                text: "And my heart started beating a entirely new way.",
+                text: "And now, half a year later, I simply can't imagine my life without you in it.",
                 sub: "One last tap!"
             },
             {
                 emoji: "💖",
-                text: "<h1 class='final-title'>Happy 6 Months, Almirabel!</h1><p style='font-size:1.2rem; font-weight:300;'>Half a year of amazing moments. Here's to us.</p>",
+                text: "<h1 class='final-title'>Happy 6 Months, Almirabel!</h1><div class='date-badge'>Nov 18, 2025 — Today & Always</div><p style='font-size:1.05rem; font-weight:300; margin-top:10px; line-height: 1.6; max-width: 90%; margin-left: auto; margin-right: auto;'>Thank you for the most amazing half-year of my life. You are my greatest adventure, and I can't wait for all the memories we have yet to make. I love you.</p>",
                 sub: ""
             }
         ];
 
         function nextStep() {
             if (currentStep >= steps.length - 1) {
-                // If on final step, just spawn more confetti on tap!
+                // If on final step, spawn more confetti on tap!
                 spawnConfetti();
                 return;
             }
@@ -202,18 +219,18 @@
                     orb.classList.add('beating');
                     spawnConfetti();
                     // Keep spawning confetti periodically on the last screen
-                    setInterval(spawnConfetti, 2000);
+                    setInterval(spawnConfetti, 2500);
                 }
 
                 message.style.opacity = 1;
                 orb.style.opacity = 1;
                 subMessage.style.opacity = 1;
-            }, 500); // 500ms matches the CSS transition time
+            }, 500); 
         }
 
         function spawnConfetti() {
-            const emojis = ['💖', '✨', '🌸', '🥂', '🎉'];
-            for (let i = 0; i < 30; i++) {
+            const emojis = ['💖', '✨', '🌸', '🥂', '🎉', '🦋'];
+            for (let i = 0; i < 35; i++) {
                 setTimeout(() => {
                     const particle = document.createElement('div');
                     particle.classList.add('particle');
@@ -222,10 +239,10 @@
                     // Random starting positions and sizes
                     particle.style.left = Math.random() * 100 + 'vw';
                     particle.style.top = '-5vh';
-                    particle.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                    particle.style.fontSize = (Math.random() * 20 + 12) + 'px';
                     
                     // Random fall durations
-                    const duration = Math.random() * 3 + 2;
+                    const duration = Math.random() * 3 + 2.5;
                     particle.style.animationDuration = duration + 's';
                     
                     document.body.appendChild(particle);
@@ -240,3 +257,4 @@
     </script>
 </body>
 </html>
+
